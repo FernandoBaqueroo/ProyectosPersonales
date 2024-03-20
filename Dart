@@ -1,0 +1,155 @@
+//Aplicación de aprendizaje
+
+void main() {
+  //Declaración de variables
+
+  //STRINGS
+  var nombre = 'Fernando';
+  final String apellido = 'Baquero';
+  const apellido2 = 'Zamora';
+
+  print('$nombre $apellido $apellido2');
+
+  nombre = "Cuco";
+  print('$nombre $apellido $apellido2');
+  print('------------------------------------------------------------------------------------------------------------------');
+
+  //NÚMEROS
+  int empleados = 10;
+  double salario = 1856.25;
+
+  print('Número de empleados: $empleados');
+  print('Salario de empleados: $salario');
+  print('------------------------------------------------------------------------------------------------------------------');
+
+  //BOOLEANOS
+  bool? isActive = null;
+
+  if (isActive == null) {
+    print('isActive es null');
+  } else {
+    print('No es null');
+  }
+  print('------------------------------------------------------------------------------------------------------------------');
+  
+  //LISTAS
+  List? numerosYStrings = [1,2,3,4,5,6,7,8,9];
+  List<int> numeros = [1,2,3,4];
+  final masNumeros = List.generate(20, (int index) => 10);
+  
+  numerosYStrings.add('Fernando');
+  print(numerosYStrings);
+  print(numeros);
+  print(masNumeros);
+  print('------------------------------------------------------------------------------------------------------------------');
+  
+  //MAP
+  Map persona = {
+    'nombre': 'Fernando',
+    'edad': 20,
+    'soltero': false,
+    1: 100,
+    2: 500
+  };
+  
+  Map<String, dynamic> persona2 = {
+    'nombre': 'Cuco',
+    'edad': 25,
+    'soltero': true
+  };
+  
+  persona.addAll({apellido: 'Cuco'});
+ 
+  print (persona[apellido]);
+  print (persona[1]);
+  print (persona);
+  print (persona2);
+  print('------------------------------------------------------------------------------------------------------------------');
+  
+  //FUNCIONES
+  void esPar(int numero) {
+    if (numero %2 == 0) {
+      print('El número introducido es par');
+    }else {
+      print('El número introducio es inpar');
+    }
+  }
+  
+  esPar(4);
+  esPar(5);
+  
+  void saludar(String nombre, [String mensaje = 'Hola']) {
+    print('$mensaje $nombre');
+  }
+  
+  saludar('Fernando');
+  print('------------------------------------------------------------------------------------------------------------------');
+  
+  //CLASES
+  final wolverine =  new Heroe(nombre: 'Logan', poder: 'Regeneracion');
+  //wolverine.nombre = 'Logan';
+  //wolverine.poder = 'Regeneración';
+  print(wolverine);
+  print('------------------------------------------------------------------------------------------------------------------');
+  
+  //CONSTRUCTORES CON NOMBRE
+  final json = {
+    'nombre': 'Superman',
+    'poder': 'Volar'
+  };
+  
+  //! --> NUNCA VA A SER NULO
+  final superman = new Heroe(nombre: json['nombre']!, poder: json['poder']!);
+  print(superman);
+  final supermanJson = Heroe.fromJson(json);
+  print(supermanJson);
+  print('------------------------------------------------------------------------------------------------------------------');
+  
+ 
+  //EJEMPLO DE GETTERS Y SETTERS
+  final cuadrado = new Cuadrado(5);
+  print('Área del cuadrado: ${cuadrado.calcularArea()}');
+  print('Área del cuadrado(get): ${cuadrado.area}');
+  cuadrado.area = 30;
+  
+}
+
+
+class Heroe {
+  String? nombre;
+  String? poder;
+  
+  Heroe({
+    required this.nombre,
+    required this.poder
+  });
+  
+  Heroe.fromJson (Map<String, String> json) {
+    this.nombre = json['nombre']!;
+    this.poder = json['poder'] ?? 'No tiene poder';
+  }
+    
+  String toString() {
+    return 'Héroe\nNombre: ${this.nombre} \nPoder: ${this.poder}';
+  }
+}
+
+//GETTERS Y SETTERS
+class Cuadrado {
+  double lado = 0;
+  
+  Cuadrado (double lado): 
+    this.lado = lado;
+  
+  double get area {
+    return this.lado * this.lado;
+  }
+  
+  set area (double valor) {
+    print('set: ${valor}');
+  }
+  
+  double calcularArea() {
+    return this.lado * this.lado;
+  }
+}
